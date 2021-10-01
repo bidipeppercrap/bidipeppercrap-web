@@ -16,13 +16,13 @@ export default function Contacts({ contacts }) {
 }
 
 export async function getStaticProps() {
-    const { data, error } = await supabase.from('contacts').select(`
+    const { data: contacts, error } = await supabase.from('contacts').select(`
         id, title, url, icon_url
     `)
 
     return {
         props: {
-            contacts: data
+            contacts
         }
     }
 }
