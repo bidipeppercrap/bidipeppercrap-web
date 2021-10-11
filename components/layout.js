@@ -6,7 +6,7 @@ export default function Layout({ children }) {
     return (
         <div className="layout__container">
             <Head>
-                <title>bidipeppercrap</title>
+                <title>{siteTitle}</title>
                 <meta name="description" content="Everything about bidipeppercrap can be found here :)" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
