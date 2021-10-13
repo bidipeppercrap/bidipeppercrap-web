@@ -10,7 +10,7 @@ export default function Layout({ children }) {
                 <meta name="description" content="Everything about bidipeppercrap can be found here :)" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main>{children}</main>
+            <main className="page__container">{children}</main>
         </div>
     )
 }

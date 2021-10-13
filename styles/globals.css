@@ -14,3 +14,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.layout__container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.page__container > .fullpage__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  place-content: center center;
+}
+
+.fullpage__container > h1.loading__text {
+  font-size: 3rem;
+}
