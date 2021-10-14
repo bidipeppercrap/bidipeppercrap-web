@@ -3,14 +3,14 @@ import { supabase } from "@/utils/supabaseClient"
 
 import PageFallback from '@/components/page-fallback'
 
-export default function CategoryPage({ posts, currentPage }) {
+export default function CategoryPage({ posts, currentPage, displayedName }) {
     const router = useRouter()
 
     if (router.isFallback) return (<PageFallback />)
 
     return (
         <div>
-            <h1>{currentPage}</h1>
+            <h1>{displayedName}</h1>
             <ul>
                 {posts.map(post => (
                     <li>{post.title}</li>
@@ -24,35 +24,34 @@ export async function getStaticPaths() {
     let paths = []
     const { data: categories, error } = await supabase.from('categories').select('id, name, displayed_name')
 
-    categories.forEach(async (c) => {
+    for (const category of categories) {
         const { data, error, count } = await supabase
-            .from('posts')
-            .select('id', { count: 'exact', head: true })
-            .eq('category_id', c.id)
+        .from('posts')
+        .select('id', { count: 'exact', head: true })
+        .eq('category_id', category.id)
 
-        const pages = []
         for (let i = 0; i < count; i++) {
-            pages.push({
+            paths.push({
                 params: {
-                    page: i + 1,
-                    categoryId: c.id,
-                    category: c.name,
-                    displayedName: c.displayed_name
-                }
+                    page: (i + 1).toString(),
+                    categoryId: category.id,
+                    category: category.name,
+                    displayedName: category.displayed_name,
+                },
             })
         }
+    }
 
-        paths = [...pages]
-    })
-
-    return { paths, fallback: true }
+    return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params }) {
+    const { page: currentPage, displayedName, categoryId } = params
+
     const { data: posts, error } = await supabase
         .from('posts')
         .select('id, title')
-        .eq('category_id', params.categoryId)
+        .eq('category_id', categoryId)
 
-    return { props: { posts, category: params.category, currentPage: params.page, displayedName: params.displayedName } }
+    return { props: { posts, currentPage, displayedName }}
 }
