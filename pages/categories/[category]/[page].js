@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { supabase } from "@/utils/supabaseClient"
 
 import PageFallback from '@/components/page-fallback'
+import Nothing from '@/components/nothing'
 
 export default function CategoryPage({ posts, currentPage, displayedName }) {
     const router = useRouter()
@@ -12,8 +13,9 @@ export default function CategoryPage({ posts, currentPage, displayedName }) {
         <div>
             <h1>{displayedName}</h1>
             <ul>
-                {posts.map(post => (
-                    <li>{post.title}</li>
+                {!posts.length && <Nothing />}
+                {posts.length && posts.map(post => (
+                    <li key={post.id}>{post.title}</li>
                 ))}
             </ul>
         </div>
@@ -22,10 +24,12 @@ export default function CategoryPage({ posts, currentPage, displayedName }) {
 
 export async function getStaticPaths() {
     let paths = []
-    const { data: categories, error } = await supabase.from('categories').select('id, name, displayed_name')
+    const { data: categories } = await supabase.from('categories').select('id')
+
+    if (!categories.length) return { paths, fallback: false }
 
     for (const category of categories) {
-        const { data, error, count } = await supabase
+        const { count } = await supabase
         .from('posts')
         .select('id', { count: 'exact', head: true })
         .eq('category_id', category.id)
@@ -34,9 +38,7 @@ export async function getStaticPaths() {
             paths.push({
                 params: {
                     page: (i + 1).toString(),
-                    categoryId: category.id,
-                    category: category.name,
-                    displayedName: category.displayed_name,
+                    category: category.id,
                 },
             })
         }
@@ -46,12 +48,19 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const { page: currentPage, displayedName, categoryId } = params
+    const { page: currentPage, category: categoryId } = params
 
-    const { data: posts, error } = await supabase
+    const { data: category } = await supabase
+        .from('categories')
+        .select('displayed_name')
+        .eq('id', categoryId)
+        .single()
+
+    const { data: posts } = await supabase
         .from('posts')
         .select('id, title')
         .eq('category_id', categoryId)
+        .eq('is_published', true)
 
-    return { props: { posts, currentPage, displayedName }}
+    return { props: { posts, currentPage, displayedName: category.displayed_name }}
 }
