@@ -1,13 +1,18 @@
 import Head from 'next/head'
 
-export const siteTitle = "bidipeppercrap"
-
-export default function Layout({ children }) {
+export default function Layout({ children, pageDescription, pageTitle }) {
+    const siteTitle = pageTitle + ' - bidipeppercrap'
+    
     return (
         <div className="layout__container">
             <Head>
+                <meta charSet="utf-8" />
+                <meta name="description" content={pageDescription} />
+
+                <meta property="og:title" content={siteTitle} key="ogtitle" />
+                <meta property="og:description" content={pageDescription} key="ogdesc" />
+
                 <title>{siteTitle}</title>
-                <meta name="description" content="Everything about bidipeppercrap can be found here :)" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="page__container">{children}</main>

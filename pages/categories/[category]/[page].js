@@ -1,16 +1,11 @@
 import { supabase } from "@/utils/supabaseClient"
 
-import Head from 'next/head'
 import Layout, {siteTitle} from '@/components/layout'
 import Nothing from '@/components/nothing'
 
 export default function CategoryPage({ posts, currentPage, displayedName }) {
     return (
-        <Layout>
-            <Head>
-                <title>{displayedName} - {siteTitle}</title>
-            </Head>
-    
+        <Layout pageTitle={displayedName} pageDescription={"Page " + currentPage + " of " + displayedName}>
             <h1 className="page__title">{displayedName}</h1>
             <ul className="post__list">
                 {!posts.length && <Nothing />}

@@ -1,16 +1,11 @@
 import { supabase } from '@/utils/supabaseClient'
 
-import Head from 'next/head'
 import Layout, { siteTitle } from '@/components/layout'
 
 export default function PostsPage({ posts, currentPage }) {
     return (
-        <Layout>
-            <Head>
-                <title>Posts - {siteTitle}</title>
-            </Head>
-
-            <h1 className="page__title">Posts</h1>
+        <Layout pageTitle="posts" pageDescription={"Page " + currentPage + " of posts"}>
+            <h1 className="page__title">posts</h1>
             <ul className="post__list">
                 {!posts.length && <Nothing />}
                 {posts.length && posts.map(post => (
