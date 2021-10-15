@@ -1,8 +1,9 @@
 import Head from 'next/head'
+import Navbar from './navbar'
 
 export default function Layout({ children, pageDescription, pageTitle }) {
     const siteTitle = pageTitle + ' - bidipeppercrap'
-    
+
     return (
         <div className="layout__container">
             <Head>
@@ -15,6 +16,7 @@ export default function Layout({ children, pageDescription, pageTitle }) {
                 <title>{siteTitle}</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Navbar isRightHanded={true}/>
             <main className="page__container">{children}</main>
         </div>
     )

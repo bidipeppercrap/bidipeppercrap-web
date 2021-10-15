@@ -5,7 +5,7 @@ import Nothing from '@/components/nothing'
 
 export default function CategoryPage({ posts, currentPage, displayedName }) {
     return (
-        <Layout pageTitle={displayedName} pageDescription={"Page " + currentPage + " of " + displayedName}>
+        <Layout pageTitle={displayedName} pageDescription={'Page ' + currentPage + ' of ' + displayedName}>
             <h1 className="page__title">{displayedName}</h1>
             <ul className="post__list">
                 {!posts.length && <Nothing />}

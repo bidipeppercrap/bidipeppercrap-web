@@ -4,7 +4,7 @@ import Layout, { siteTitle } from '@/components/layout'
 
 export default function PostsPage({ posts, currentPage }) {
     return (
-        <Layout pageTitle="posts" pageDescription={"Page " + currentPage + " of posts"}>
+        <Layout pageTitle="posts" pageDescription={'Page ' + currentPage + ' of posts'}>
             <h1 className="page__title">posts</h1>
             <ul className="post__list">
                 {!posts.length && <Nothing />}
