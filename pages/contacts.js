@@ -15,6 +15,7 @@ export default function Contacts({ contacts }) {
             <Head>
                 <title>Contacts - {siteTitle}</title>
             </Head>
+    
             <h1 className="page__title">Contacts</h1>
             <ul className="contact__list">
                 {contacts.map((contact) => (

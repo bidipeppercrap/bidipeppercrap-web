@@ -15,6 +15,12 @@ a {
   box-sizing: border-box;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
 .layout__container {
   display: flex;
   min-height: 100vh;

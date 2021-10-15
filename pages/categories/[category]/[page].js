@@ -33,6 +33,7 @@ export default function CategoryPage({ posts, currentPage, displayedName }) {
 }
 
 export async function getStaticPaths() {
+    const skip = process.env.NEXT_PAGINATION_SKIP
     const paths = []
     const { data: categories } = await supabase.from('categories').select('id')
 
@@ -43,8 +44,11 @@ export async function getStaticPaths() {
         .from('posts')
         .select('id', { count: 'exact', head: true })
         .eq('category_id', category.id)
+        .eq('is_published', true)
 
-        for (let i = 0; i < count; i++) {
+        const pageCount = Math.ceil(count / skip)
+
+        for (let i = 0; i < pageCount; i++) {
             paths.push({
                 params: {
                     page: (i + 1).toString(),
@@ -72,7 +76,7 @@ export async function getStaticProps({ params }) {
 
     const { data: posts } = await supabase
         .from('posts')
-        .select('id, title')
+        .select('id, title, thumbnail_url')
         .eq('category_id', categoryId)
         .eq('is_published', true)
         .range(startIndex, endIndex)
