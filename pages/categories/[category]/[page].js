@@ -73,6 +73,7 @@ export async function getStaticProps({ params }) {
         .select('id, title, thumbnail_url')
         .eq('category_id', categoryId)
         .eq('is_published', true)
+        .order('created_at', { ascending: false })
         .range(startIndex, endIndex)
 
     return { props: { posts, currentPage, displayedName: category.displayed_name }}

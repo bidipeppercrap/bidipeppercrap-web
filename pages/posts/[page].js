@@ -56,6 +56,7 @@ export async function getStaticProps({ params }) {
         .from('posts')
         .select('id, title, thumbnail_url')
         .eq('is_published', true)
+        .order('created_at', { ascending: false })
         .range(startIndex, endIndex)
     
     return { props: { posts, currentPage } }
