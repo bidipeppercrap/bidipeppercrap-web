@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { supabase } from "@/utils/supabaseClient"
 
+import Head from 'next/head'
+import Layout, {siteTitle} from '@/components/layout'
 import PageFallback from '@/components/page-fallback'
 import Nothing from '@/components/nothing'
 
@@ -10,20 +12,28 @@ export default function CategoryPage({ posts, currentPage, displayedName }) {
     if (router.isFallback) return (<PageFallback />)
 
     return (
-        <div>
-            <h1>{displayedName}</h1>
-            <ul>
+        <Layout>
+            <Head>
+                <title>{displayedName} - {siteTitle}</title>
+            </Head>
+    
+            <h1 className="page__title">{displayedName}</h1>
+            <ul className="post__list">
                 {!posts.length && <Nothing />}
                 {posts.length && posts.map(post => (
-                    <li key={post.id}>{post.title}</li>
+                    <li key={post.id} className="post__wrapper">
+                        <article className="post">
+                            <h2 className="post__title">{post.title}</h2>
+                        </article>
+                    </li>
                 ))}
             </ul>
-        </div>
+        </Layout>
     )
 }
 
 export async function getStaticPaths() {
-    let paths = []
+    const paths = []
     const { data: categories } = await supabase.from('categories').select('id')
 
     if (!categories.length) return { paths, fallback: false }
