@@ -1,16 +1,10 @@
-import { useRouter } from 'next/router'
 import { supabase } from "@/utils/supabaseClient"
 
 import Head from 'next/head'
 import Layout, {siteTitle} from '@/components/layout'
-import PageFallback from '@/components/page-fallback'
 import Nothing from '@/components/nothing'
 
 export default function CategoryPage({ posts, currentPage, displayedName }) {
-    const router = useRouter()
-
-    if (router.isFallback) return (<PageFallback />)
-
     return (
         <Layout>
             <Head>
