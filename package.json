@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ibm/plex": "^6.0.0",
     "@supabase/supabase-js": "^1.24.0",
     "next": "11.1.2",
     "react": "17.0.2",
