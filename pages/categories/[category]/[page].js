@@ -49,7 +49,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const { page: currentPage, category: categoryId } = params
-    const skip = 2
+    const skip = process.env.NEXT_PAGINATION_SKIP
     const pageIndex = currentPage - 1
     const startIndex = pageIndex * skip
     const endIndex = startIndex + (skip - 1)
