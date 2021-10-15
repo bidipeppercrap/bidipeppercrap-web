@@ -49,6 +49,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const { page: currentPage, category: categoryId } = params
+    const skip = 2
+    const pageIndex = currentPage - 1
+    const startIndex = pageIndex * skip
+    const endIndex = startIndex + (skip - 1)
 
     const { data: category } = await supabase
         .from('categories')
@@ -61,6 +65,7 @@ export async function getStaticProps({ params }) {
         .select('id, title')
         .eq('category_id', categoryId)
         .eq('is_published', true)
+        .range(startIndex, endIndex)
 
     return { props: { posts, currentPage, displayedName: category.displayed_name }}
 }
