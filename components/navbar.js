@@ -24,7 +24,7 @@ export default function Navbar({ isRightHanded }) {
                 <ul className="navbar__menu">
                     {navlinks.map(link =>
                         <li key={link.path} className="navbar__menu__item">
-                            <Link href={link.path}>
+                            <Link onClick={() => setToggleMenu(false)} href={link.path}>
                                 <a>{link.name}</a>
                             </Link>
                         </li>

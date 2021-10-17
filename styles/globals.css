@@ -24,9 +24,13 @@
   right: 0;
 }
 
-ul.navbar__menu > li.navbar__menu__item {
+ul.navbar__menu > li.navbar__menu__item > a {
   padding: 1rem;
   font-size: 1rem;
+  display: block;
+}
+
+ul.navbar__menu > li.navbar__menu__item {
   background-color: var(--color--primary);
   color: var(--color--accent);
   word-break: break-all;
