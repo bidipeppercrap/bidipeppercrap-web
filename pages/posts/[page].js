@@ -10,6 +10,7 @@ export default function PostsPage({ posts, currentPage }) {
                 {!posts.length && <Nothing />}
                 {posts.length && posts.map(post => (
                     <li key={post.id} className="post__wrapper">
+                        {post.thumbnail_url && <img className="post__thumbnail" src={post.thumbnail_url} alt="Thumbnail of this post" />}
                         <article className="post">
                             <h2 className="post__title">{post.title}</h2>
                         </article>

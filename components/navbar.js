@@ -7,7 +7,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Navbar({ isRightHanded }) {
     const { data: navlinks, error } = useSWR('/api/navlinks', fetcher)
-    const primaryHandStyle = isRightHanded ? { right: 0, flexDirection: 'row-reverse' } : { left: 0, flexDirection: 'row' }
+    const primaryHandStyle = isRightHanded ? { flexDirection: 'row-reverse' } : { flexDirection: 'row' }
     const [toggleMenu, setToggleMenu] = useState(false)
 
     if (error) return <nav className="navbar borderize">X</nav>
@@ -15,22 +15,22 @@ export default function Navbar({ isRightHanded }) {
     return (
         <>
         {toggleMenu && <div className="navbar__toggled"></div>}
-        <nav
-            onClick={() => setToggleMenu(!toggleMenu)}
-            className="navbar"
-            style={primaryHandStyle}>
-                <div className="navbar__toggle borderize">☰</div>
-                {toggleMenu &&
-                    <ul className="navbar__menu">
-                        {navlinks.map(link =>
-                            <li key={link.path} className="navbar__menu__item">
-                                <Link href={link.path}>
-                                    <a>{link.name}</a>
-                                </Link>
-                            </li>
-                        )}
-                    </ul>
-                }
+        <nav className="navbar">
+            <div
+                onClick={() => setToggleMenu(!toggleMenu)}
+                style={primaryHandStyle}
+                className="navbar__toggle borderize">☰</div>
+            {toggleMenu &&
+                <ul className="navbar__menu">
+                    {navlinks.map(link =>
+                        <li key={link.path} className="navbar__menu__item">
+                            <Link href={link.path}>
+                                <a>{link.name}</a>
+                            </Link>
+                        </li>
+                    )}
+                </ul>
+            }
         </nav>
         </>
     )
