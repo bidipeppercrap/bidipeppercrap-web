@@ -1,6 +1,6 @@
 import { supabase } from "@/utils/supabaseClient"
 
-import Layout, {siteTitle} from '@/components/layout'
+import Layout from '@/components/layout'
 import Nothing from '@/components/nothing'
 
 export default function CategoryPage({ posts, currentPage, displayedName }) {

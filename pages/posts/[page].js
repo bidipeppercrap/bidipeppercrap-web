@@ -1,6 +1,7 @@
 import { supabase } from '@/utils/supabaseClient'
 
-import Layout, { siteTitle } from '@/components/layout'
+import Link from 'next/link'
+import Layout from '@/components/layout'
 
 export default function PostsPage({ posts, currentPage }) {
     return (
@@ -9,12 +10,16 @@ export default function PostsPage({ posts, currentPage }) {
             <ul className="post__list">
                 {!posts.length && <Nothing />}
                 {posts.length && posts.map(post => (
-                    <li key={post.id} className="post__wrapper">
-                        {post.thumbnail_url && <img className="post__thumbnail" src={post.thumbnail_url} alt="Thumbnail of this post" />}
-                        <article className="post">
-                            <h2 className="post__title">{post.title}</h2>
-                        </article>
-                    </li>
+                    <Link href={`/post/${post.id}`}>
+                        <a>
+                            <li key={post.id} className="post__wrapper">
+                                {post.thumbnail_url && <img className="post__thumbnail" src={post.thumbnail_url} alt="Thumbnail of this post" />}
+                                <article className="post">
+                                    <h2 className="post__title">{post.title}</h2>
+                                </article>
+                            </li>
+                        </a>
+                    </Link>
                 ))}
             </ul>
         </Layout>
