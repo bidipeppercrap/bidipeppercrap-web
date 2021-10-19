@@ -57,6 +57,7 @@ export async function getStaticProps({ params }) {
         .from('posts')
         .select('id, title, thumbnail_url')
         .eq('is_published', true)
+        .eq('include_in_posts', true)
         .order('created_at', { ascending: false })
         .range(startIndex, endIndex)
     
