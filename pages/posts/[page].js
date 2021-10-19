@@ -2,8 +2,9 @@ import { supabase } from '@/utils/supabaseClient'
 
 import Link from 'next/link'
 import Layout from '@/components/layout'
+import Pagination from '@/components/pagination'
 
-export default function PostsPage({ posts, currentPage }) {
+export default function PostsPage({ posts, currentPage, pageCount }) {
     return (
         <Layout pageTitle="posts" pageDescription={'Page ' + currentPage + ' of posts'}>
             <h1 className="page__title">posts</h1>
@@ -22,6 +23,7 @@ export default function PostsPage({ posts, currentPage }) {
                     </li>
                 ))}
             </ul>
+            <Pagination currentPage={currentPage} pageCount={pageCount} url="/posts" />
         </Layout>
     )
 }
@@ -53,13 +55,15 @@ export async function getStaticProps({ params }) {
     const startIndex = (currentPage - 1) * skip
     const endIndex = startIndex + (skip - 1)
 
-    const { data: posts } = await supabase
+    const { data: posts, count } = await supabase
         .from('posts')
-        .select('id, title, thumbnail_url')
+        .select('id, title, thumbnail_url', { count: 'exact' })
         .eq('is_published', true)
         .eq('include_in_posts', true)
         .order('created_at', { ascending: false })
         .range(startIndex, endIndex)
+
+    const pageCount = Math.ceil(count / skip)
     
-    return { props: { posts, currentPage } }
+    return { props: { posts, currentPage, pageCount } }
 }

@@ -122,6 +122,19 @@ main.page__container > h1.page__title {
   flex-direction: column;
 }
 
+.page__pagination > .pagination__link {
+  background-color: var(--color--primary);
+  color: var(--color--accent);
+  flex-grow: 1;
+  padding: 1rem;
+  text-align: center;
+}
+
+.page__container > .page__pagination {
+  display: flex;
+  gap: 2rem;
+}
+
 .page__container > a.page__button {
   background-color: var(--color--primary);
   color: var(--color--accent);

@@ -2,9 +2,10 @@ import { supabase } from "@/utils/supabaseClient"
 
 import Link from 'next/link'
 import Layout from '@/components/layout'
+import Pagination from '@/components/pagination'
 import Nothing from '@/components/nothing'
 
-export default function CategoryPage({ posts, currentPage, displayedName }) {
+export default function CategoryPage({ posts, currentPage, pageCount, categoryId, displayedName }) {
     return (
         <Layout pageTitle={displayedName} pageDescription={'Page ' + currentPage + ' of ' + displayedName}>
             <h1 className="page__title">{displayedName}</h1>
@@ -23,6 +24,7 @@ export default function CategoryPage({ posts, currentPage, displayedName }) {
                     </li>
                 ))}
             </ul>
+            <Pagination url={`/categories/${categoryId}`} currentPage={currentPage} pageCount={pageCount} />
         </Layout>
     )
 }
@@ -69,13 +71,15 @@ export async function getStaticProps({ params }) {
         .eq('id', categoryId)
         .single()
 
-    const { data: posts } = await supabase
+    const { data: posts, count } = await supabase
         .from('posts')
-        .select('id, title, thumbnail_url')
+        .select('id, title, thumbnail_url', { count: 'exact' })
         .eq('category_id', categoryId)
         .eq('is_published', true)
         .order('created_at', { ascending: false })
         .range(startIndex, endIndex)
 
-    return { props: { posts, currentPage, displayedName: category.displayed_name }}
+    const pageCount = Math.ceil(count / skip)
+
+    return { props: { posts, currentPage, pageCount, categoryId, displayedName: category.displayed_name }}
 }

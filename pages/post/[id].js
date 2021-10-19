@@ -16,7 +16,7 @@ export default function Post({ post }) {
                     <p className="post__content">{post.content}</p>
                 </article>
             </div>
-            <a onClick={() => router.back()} className="page__button">🔙</a>
+            <a onClick={() => router.back()} className="page__button">👈</a>
         </Layout>
     )
 }
