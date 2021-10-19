@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Navbar from './navbar'
+import Footer from './footer'
 
 export default function Layout({ children, pageDescription, pageTitle }) {
     const siteTitle = pageTitle + ' - bidipeppercrap'
@@ -7,7 +8,6 @@ export default function Layout({ children, pageDescription, pageTitle }) {
     return (
         <div className="layout__container">
             <Head>
-                <meta charSet="utf-8" />
                 <meta name="description" content={pageDescription} />
 
                 <meta property="og:title" content={siteTitle} key="ogtitle" />
@@ -18,6 +18,7 @@ export default function Layout({ children, pageDescription, pageTitle }) {
             </Head>
             <Navbar isRightHanded={true}/>
             <main className="page__container">{children}</main>
+            <Footer />
         </div>
     )
 }

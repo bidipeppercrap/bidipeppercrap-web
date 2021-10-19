@@ -108,9 +108,13 @@ h1.page__title {
 
 main.page__container {
   margin: 2rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 50vh auto;
+  place-items: center stretch;
   gap: 2rem;
+}
+main.page__container > h1.page__title {
+  text-align: center;
 }
 
 .layout__container {
@@ -133,6 +137,16 @@ main.page__container {
 
 .fullpage__container > h1.loading__text {
   font-size: 3rem;
+}
+
+footer.footer {
+  display: flex;
+  place-content: center center;
+  height: 50vh;
+}
+
+footer.footer img {
+  filter: invert(1)
 }
 
 ::selection {
