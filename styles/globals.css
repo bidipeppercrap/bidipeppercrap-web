@@ -87,11 +87,12 @@ article.post {
   gap: 1rem;
 }
 
-.post__wrapper > img.post__thumbnail {
+.post__wrapper img.post__thumbnail {
   max-width: 100%;
 }
 
-.post__wrapper {
+.post__wrapper,
+.post__wrapper a {
   display: flex;
   flex-direction: column;
 }
