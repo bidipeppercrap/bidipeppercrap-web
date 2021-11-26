@@ -14,24 +14,25 @@ export default function Navbar({ isRightHanded }) {
     if (!navlinks) return <nav className="navbar borderize">...</nav>
     return (
         <>
-        {toggleMenu && <div className="navbar__toggled"></div>}
-        <nav className="navbar">
-            <div
-                onClick={() => setToggleMenu(!toggleMenu)}
-                style={primaryHandStyle}
-                className="navbar__toggle borderize">☰</div>
-            {toggleMenu &&
-                <ul className="navbar__menu">
-                    {navlinks.map(link =>
-                        <li key={link.path} className="navbar__menu__item">
-                            <Link onClick={() => setToggleMenu(false)} href={link.path}>
-                                <a>{link.name}</a>
-                            </Link>
-                        </li>
-                    )}
-                </ul>
-            }
-        </nav>
+        <div
+        onClick={() => setToggleMenu(!toggleMenu)}
+        style={primaryHandStyle}
+        className="navbar__toggle borderize">☰</div>
+        {toggleMenu &&
+            <nav className="navbar">
+                {toggleMenu &&
+                    <ul className="navbar__menu">
+                        {navlinks.map(link =>
+                            <li key={link.path} className="navbar__menu__item">
+                                <Link onClick={() => setToggleMenu(false)} href={link.path}>
+                                    <a>{link.name}</a>
+                                </Link>
+                            </li>
+                        )}
+                    </ul>
+                }
+            </nav>
+        }
         </>
     )
 }

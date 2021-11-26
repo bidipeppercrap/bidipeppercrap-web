@@ -6,22 +6,13 @@
 :root {
   --color--primary: #fff;
   --color--accent: #000;
+  --navbar--toggle--size: 3rem;
 }
 
 .borderize {
   border-style: solid;
   border-width: 1px;
   border-radius: 0;
-}
-
-.navbar__toggled {
-  background-color: var(--color--accent);
-  z-index: 99;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 ul.navbar__menu > li.navbar__menu__item > a {
@@ -37,36 +28,49 @@ ul.navbar__menu > li.navbar__menu__item {
 }
 
 ul.navbar__menu {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   gap: 1rem;
   grid-area: m;
+  overflow-y: scroll;
+  padding-bottom: 45vh;
+  padding-top: 50vh;
+  padding-right: calc(3rem + var(--navbar--toggle--size));
+  padding-left: 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+ul.navbar__menu::-webkit-scrollbar {
+  display: none;
 }
 
 .navbar__toggle {
   background-color: var(--color--primary);
   color: var(--color--accent);
-  padding: 1rem;
+  height: var(--navbar--toggle--size);
+  width: var(--navbar--toggle--size);
+  place-items: center;
+  place-content: center;
+  display: flex;
   cursor: pointer;
   user-select: none;
   align-self: end;
   grid-area: t;
+  position: fixed;
+  right: 2rem;
+  bottom: 45vh;
+  z-index: 9999;
 }
 
 nav.navbar {
+  background-color: var(--color--accent);
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   position: fixed;
-  margin: 2rem;
   z-index: 999;
-  display: grid;
-  gap: 1rem;
-  grid-template-areas: "m t"
-                       "m .";
-  grid-template-rows: 1fr 50vw;
-  grid-template-columns: 1fr auto;
 }
 
 article.post > p.post__content {
