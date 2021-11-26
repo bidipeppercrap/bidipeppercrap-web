@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
 import { supabase } from '@/utils/supabaseClient'
 
-import Head from 'next/head'
-import Layout, { siteTitle } from '@/components/layout'
+import Layout from '@/components/layout'
 import PageFallback from '@/components/page-fallback'
 
 export default function Contacts({ contacts }) {
@@ -11,11 +10,7 @@ export default function Contacts({ contacts }) {
     if (router.isFallback) return <PageFallback />
 
     return (
-        <Layout>
-            <Head>
-                <title>Contacts - {siteTitle}</title>
-            </Head>
-    
+        <Layout pageTitle="contacts" pageDescription={'Contacts for bidipeppercrap are listed here'}>
             <h1 className="page__title">Contacts</h1>
             <ul className="contact__list">
                 {contacts.map((contact) => (
