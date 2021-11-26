@@ -76,6 +76,7 @@ export async function getStaticProps({ params }) {
         .select('id, title, thumbnail_url', { count: 'exact' })
         .eq('category_id', categoryId)
         .eq('is_published', true)
+        .order('is_highlighted', { ascending: false })
         .order('created_at', { ascending: false })
         .range(startIndex, endIndex)
 

@@ -60,6 +60,7 @@ export async function getStaticProps({ params }) {
         .select('id, title, thumbnail_url', { count: 'exact' })
         .eq('is_published', true)
         .eq('include_in_posts', true)
+        .order('is_highlighted', { ascending: false })
         .order('created_at', { ascending: false })
         .range(startIndex, endIndex)
 
