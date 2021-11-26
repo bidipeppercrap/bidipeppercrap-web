@@ -9,6 +9,66 @@
   --navbar--toggle--size: 3rem;
 }
 
+.load-more {
+  background-color: var(--color--primary);
+  display: flex;
+  place-items: center center;
+  padding: 1rem;
+}
+.load-more a {
+  display: block;
+}
+
+.new-posts__list article.post {
+  width: calc(75vw - 2rem);
+  place-content: center;
+}
+
+.new-posts__list {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 2rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.new-posts__list::-webkit-scrollbar {
+  display: none;
+}
+
+.new-posts__list > .post__wrapper {
+  display: flex;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+.new-posts__list > .post__wrapper a {
+  display: grid;
+}
+
+.new-posts {
+  display: grid;
+  gap: 2rem;
+}
+
+.new-posts > h1.new-posts__title {
+  margin: 0;
+}
+
+.main-page__logo {
+  display: flex;
+  place-content: center center;
+}
+
+.main-page__logo img {
+  filter: invert(1)
+}
+
 .contact__list {
   display: grid;
   gap: 2rem;
@@ -125,8 +185,8 @@ article.post {
   max-width: 100%;
 }
 
-.post__wrapper,
-.post__wrapper a {
+.post__list > .post__wrapper,
+.post__list > .post__wrapper a {
   display: flex;
   flex-direction: column;
 }
