@@ -11,11 +11,16 @@ export default function Contacts({ contacts }) {
 
     return (
         <Layout pageTitle="contacts" pageDescription={'Contacts for bidipeppercrap are listed here'}>
-            <h1 className="page__title">Contacts</h1>
+            <h1 className="page__title">contacts</h1>
             <ul className="contact__list">
                 {contacts.map((contact) => (
                     <li key={contact.id} className="contact__item">
-                        {contact.title}
+                        <a target="_blank" href={contact.url} className={!contact.url ? 'contact__no-link' : undefined}>
+                            {contact.icon_url &&
+                                <img src={contact.icon_url} alt={contact.title + ' icon'} className="contact__icon" />
+                            }
+                            <p className="contact__description">{contact.description}</p>
+                        </a>
                     </li>
                 ))}
             </ul>
@@ -25,7 +30,7 @@ export default function Contacts({ contacts }) {
 
 export async function getStaticProps() {
     const { data: contacts, error } = await supabase.from('contacts').select(`
-        id, title, url, icon_url
+        id, title, description, url, icon_url
     `)
 
     return {
