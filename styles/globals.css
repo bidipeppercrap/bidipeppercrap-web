@@ -238,6 +238,7 @@ article.post {
   max-width: 100%;
 }
 
+main.page__container > .post__wrapper,
 .post__list > .post__wrapper,
 .post__list > .post__wrapper a {
   display: flex;
