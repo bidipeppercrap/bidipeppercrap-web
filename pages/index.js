@@ -6,7 +6,7 @@ import Layout from '@/components/layout'
 
 import logo_long from '../public/logo_long.svg'
 
-export default function Home({ posts }) {
+export default function Home({ posts, contacts }) {
   return (
     <Layout pageTitle="home" pageDescription="Welcome to the bidipeppercrap.com">
       <div className="main-page__logo">
@@ -42,17 +42,45 @@ export default function Home({ posts }) {
           </ul>
         </div>
       }
+      {contacts &&
+        <div className="main-page__contacts">
+          <h1 className="main-page__contacts__title">contacts</h1>
+          <ul className="main-page__contacts__list">
+            {contacts.map(contact => (
+              <li key={contact.id} className="main-page__contacts__item">
+                <Link href={contact.url}>
+                  <a>
+                    <img src={contact.icon_url} alt={contact.title} />
+                  </a>
+                </Link>
+              </li>
+            ))}
+            <li className="main-page__contacts__item load-more">
+              <Link href="/contacts">
+                <a>👉</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      }
     </Layout>
   )
 }
 
 export async function getStaticProps() {
   const { data: posts } = await supabase
-        .from('posts')
-        .select('id, title, thumbnail_url')
-        .eq('is_published', true)
-        .order('created_at', { ascending: false })
-        .range(0, 5)
+    .from('posts')
+    .select('id, title, thumbnail_url')
+    .eq('is_published', true)
+    .order('created_at', { ascending: false })
+    .range(0, 5)
+  
+  const { data: contacts } = await supabase
+    .from('contacts')
+    .select('id, title, description, url, icon_url')
+    .neq('url', null)
+    .neq('icon_url', null)
+    .range(0, 9)
 
-  return { props: { posts } }
+  return { props: { posts, contacts } }
 }
