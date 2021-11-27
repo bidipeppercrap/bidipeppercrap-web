@@ -85,5 +85,5 @@ export async function getStaticProps() {
     .neq('icon_url', null)
     .range(0, 9)
 
-  return { props: { posts, contacts } }
+  return { props: { posts, contacts }, revalidate: 10 }
 }

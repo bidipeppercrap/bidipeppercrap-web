@@ -46,7 +46,7 @@ export async function getStaticPaths() {
         })
     }
 
-    return { paths, fallback: false }
+    return { paths, fallback: 'blocking' }
 }
 
 export async function getStaticProps({ params }) {
@@ -66,5 +66,5 @@ export async function getStaticProps({ params }) {
 
     const pageCount = Math.ceil(count / skip)
     
-    return { props: { posts, currentPage, pageCount } }
+    return { props: { posts, currentPage, pageCount }, revalidate: 10 }
 }

@@ -8,7 +8,7 @@ export default function Post({ post }) {
 
     return (
         <Layout pageTitle={post.title} pageDescription={post.content}>
-            <h1 className="page__title">Category</h1>
+            <h1 className="page__title">{post.categories ? post.categories.displayed_name : 'posts'}</h1>
             <div className="post__wrapper">
                 {post.thumbnail_url && <img className="post__thumbnail" src={post.thumbnail_url} alt="Thumbnail of this post" />}
                 <article className="post">
@@ -26,16 +26,23 @@ export async function getStaticPaths() {
 
     const paths = posts.map(post => ({ params: { id: post.id } }))
 
-    return { paths, fallback: false }
+    return { paths, fallback: 'blocking' }
 }
 
 export async function getStaticProps({ params }) {
     const { data: post } = await supabase
         .from('posts')
         .select(`
-            title, content, thumbnail_url, created_at`)
+            title, content, thumbnail_url, created_at,
+            categories (
+                displayed_name
+            )`)
         .eq('id', params.id)
         .single()
 
-    return { props: { post } }
+    return {
+        props:
+            { post },
+        revalidate: 10
+    }
 }
