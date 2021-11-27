@@ -9,6 +9,17 @@
   --navbar--toggle--size: 3rem;
 }
 
+.desktop-warning {
+  font-size: 3rem;
+  display: none;
+  place-content: center center;
+  text-align: center;
+  color: var(--color--accent);
+  background-color: var(--color--primary);
+  padding: 3rem;
+  font-weight: bold;
+}
+
 .main-page__contacts {
   display: grid;
   gap: 2rem;
@@ -329,4 +340,10 @@ ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+@media screen and (min-width: 600px) {
+  .desktop-warning {
+    display: flex;
+  }
 }

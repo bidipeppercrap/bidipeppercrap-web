@@ -18,6 +18,9 @@ export default function Home({ posts, contacts }) {
           priority={true}
         />
       </div>
+      <div className="desktop-warning">
+        You are viewing this on desktop.<br />This website design is not yet ready for desktop.
+      </div>
       {posts &&
         <div className="new-posts">
           <h1 className="new-posts__title">new posts</h1>
