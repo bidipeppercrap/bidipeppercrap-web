@@ -56,7 +56,7 @@
   scroll-snap-stop: normal;
 }
 .main-page__contacts__list > .main-page__contacts__item img {
-  height: 3rem;
+  height: 2rem;
 }
 
 .load-more {
@@ -71,6 +71,7 @@
 .new-posts__list article.post {
   width: calc(75vw - 2rem);
   place-content: center;
+  place-items: center;
 }
 
 .new-posts__list {
@@ -102,6 +103,7 @@
 }
 .new-posts__list > .post__wrapper a {
   display: grid;
+  grid-auto-rows: auto 1fr;
 }
 
 .new-posts {
@@ -220,7 +222,7 @@ article.post > p.post__content {
   margin: 0;
 }
 
-article.post > h2.post__title {
+article.post > .post__title {
   margin: 0;
 }
 

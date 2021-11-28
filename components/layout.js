@@ -14,7 +14,8 @@ export default function Layout({ children, pageDescription, pageTitle }) {
                 <meta property="og:description" content={pageDescription} key="ogdesc" />
 
                 <title>{siteTitle}</title>
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+                <link rel="alternate icon" href="/favicon.ico" />
             </Head>
             <Navbar isRightHanded={true}/>
             <main className="page__container">{children}</main>

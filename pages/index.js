@@ -31,7 +31,7 @@ export default function Home({ posts, contacts }) {
                   <a>
                       {post.thumbnail_url && <img className="post__thumbnail" src={post.thumbnail_url} alt="Thumbnail of this post" />}
                       <article className="post">
-                          <h2 className="post__title">{post.title}</h2>
+                          <h3 className="post__title">{post.title}</h3>
                       </article>
                   </a>
                 </Link>
