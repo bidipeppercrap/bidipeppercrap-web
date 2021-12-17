@@ -9,6 +9,14 @@
   --navbar--toggle--size: 3rem;
 }
 
+.post__content > p {
+  margin: 0;
+}
+
+.post__content a {
+  text-decoration: underline;
+}
+
 .desktop-warning {
   font-size: 3rem;
   display: none;
@@ -219,6 +227,9 @@ nav.navbar {
 }
 
 article.post > .post__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin: 0;
 }
 
