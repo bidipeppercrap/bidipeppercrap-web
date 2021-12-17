@@ -13,7 +13,7 @@ export default function Post({ post }) {
                 {post.thumbnail_url && <img className="post__thumbnail" src={post.thumbnail_url} alt="Thumbnail of this post" />}
                 <article className="post">
                     <h3 className="post__title">{post.title}</h3>
-                    <p className="post__content">{post.content}</p>
+                    {post.content && <p className="post__content">{post.content}</p>}
                 </article>
             </div>
             <a onClick={() => router.back()} className="page__button">👈</a>
