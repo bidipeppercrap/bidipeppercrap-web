@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
 import { supabase } from "@/utils/supabaseClient"
 
+import { remark } from 'remark'
+import html from 'remark-html'
+
 import Layout from '@/components/layout'
 
 export default function Post({ post }) {
@@ -13,7 +16,7 @@ export default function Post({ post }) {
                 {post.thumbnail_url && <img className="post__thumbnail" src={post.thumbnail_url} alt="Thumbnail of this post" />}
                 <article className="post">
                     <h3 className="post__title">{post.title}</h3>
-                    {post.content && <p className="post__content">{post.content}</p>}
+                    {post.content && <div className="post__content" dangerouslySetInnerHTML={{ __html: post.content }} />}
                 </article>
             </div>
             <a onClick={() => router.back()} className="page__button">👈</a>
@@ -39,6 +42,12 @@ export async function getStaticProps({ params }) {
             )`)
         .eq('id', params.id)
         .single()
+    
+    const processedContent = await remark()
+        .use(html)
+        .process(post.content)
+
+    post.content = processedContent.toString()
 
     return {
         props:
