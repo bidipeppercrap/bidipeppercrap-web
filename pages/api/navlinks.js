@@ -9,11 +9,7 @@ export default async (req, res) => {
     {
       path: '/posts/1',
       name: 'posts'
-    },
-    {
-        path: '/',
-        name: 'home'
-    },
+    }
   ]
 
   const { data: categories } = await supabase.from('categories').select('id, displayed_name')

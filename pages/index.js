@@ -8,7 +8,7 @@ import logo_long from '../public/logo_long.svg'
 
 export default function Home({ posts, contacts }) {
   return (
-    <Layout pageTitle="home" pageDescription="Welcome to the bidipeppercrap.com">
+    <Layout pageTitle="🏡" pageDescription="Welcome to the bidipeppercrap.com">
       <div className="main-page__logo">
         <Image
           src={logo_long}
@@ -75,6 +75,7 @@ export async function getStaticProps() {
     .from('posts')
     .select('id, title, thumbnail_url')
     .eq('is_published', true)
+    .eq('include_in_posts', true)
     .order('created_at', { ascending: false })
     .range(0, 5)
   
