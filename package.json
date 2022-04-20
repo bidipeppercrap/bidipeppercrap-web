@@ -1,6 +1,6 @@
 {
   "name": "bidipeppercrap-web",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,7 +10,7 @@
   "dependencies": {
     "@ibm/plex": "^6.0.0",
     "@supabase/supabase-js": "^1.24.0",
-    "next": "^12.0.1",
+    "next": "^12.1.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "remark": "^14.0.2",

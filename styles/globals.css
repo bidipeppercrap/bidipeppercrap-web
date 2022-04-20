@@ -254,6 +254,7 @@ article.post {
 main.page__container > .post__wrapper,
 .post__list > .post__wrapper,
 .post__list > .post__wrapper a {
+  background-color: var(--color--primary);
   display: flex;
   flex-direction: column;
 }
